@@ -19,39 +19,42 @@ print_info() {
         echo ""
 }
 
+print_debug() {
+        command printf "\033[33mDEBUG: %s\033[0m " "$1" >&2
+        echo ""
+}
+
 repo() {
         echo "roman-vanesyan/dotfiles"
 }
 
-fetch_latest_release() {
-        curl --silent "https://api.github.com/repos/($repo)/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'
+archive_url() {
+        echo "https://github.com/$(repo)/tarball/main"
 }
 
-release_url() {
-        echo "https://github.com/($repo)/releases"
-}
+download_archive() {
+        local tmpdir="$(mktemp -d)"
+        local download_url="$(archive_url)"
+        local download_file="$tmpdir/dotfiles.tar.gz"
 
-download_release() {
-        local version=$1
-        local tmpdir=$(mktemp -d)
-        local download_url="$(release_url)/download/$version/dotfiles_$version.tar.gz"
-        local download_file="$tmpdir/dotfiles_$version.tar.gz"
-
-        curl --progress-bar --silent --location --fail "$download_url" --output "$download_file" --write-out "$download_file"
+        curl --progress-bar --silent --location --fail "$download_url" --output "$download_file" -w "$download_file"
 }
 
 install_from_archive() {
         local dotfiles_archive=$1
         local install_dir=$2
 
-        print_info "Extracting release $version..."
+        print_info "Extracting archive..."
+        print_debug "$dotfiles_archive"
 
-        if [ -f "$dotfiles_archive" ]; then
-                tar -xzf "$dotfiles_archive" -C "$HOME"
-                rm -f "$dotfiles_archive"
+        if [[ ! -f "$dotfiles_archive" ]]; then
+                print_error "Archive not found" && exit 1
         fi
 
-        print_info "Extracted"
+        tar -xzf "$dotfiles_archive" -C "$install_dir" --strip-components=1
+        rm -f "$dotfiles_archive"
+
+        print_info "Extracted to $install_dir"
 }
 
 install_volta() {
@@ -66,6 +69,7 @@ install_volta() {
 
 has_supported_node() {
         if ! command -v node &>/dev/null; then
+                print_info "Node is not installed"
                 return 1
         fi
 
@@ -74,7 +78,8 @@ has_supported_node() {
         local version=''
 
         for version in "${supported_node_versions[@]}"; do
-                if [ "$node_version" == "$version" ]; then
+                if [ "$version" -eq "$node_version" ]; then
+                        print_debug "Supported node version is installed: $(node --version)"
                         return 0
                 fi
         done
@@ -83,6 +88,7 @@ has_supported_node() {
 }
 
 install_node() {
+        print_info "Checking for supported Node version..."
         if has_supported_node; then
                 print_info "Supported version of Node is installed, skipping..."
                 return
@@ -95,30 +101,26 @@ install_node() {
         print_info "Node installed"
 }
 
-install_release() {
-        local version=$1
-        local install_dir=$2
+install_dotfiles() {
+        local install_dir=$1
 
-        print_info "Checking for existing installation..."
+        print_info "Checking for existing Node installation..."
         if ! command -v node &>/dev/null; then
-                print_error "Already installed"
+                print_error "Node is already installed"
                 exit 1
         fi
-
-        print_info "Downloading release $version..."
 
         local download_archive=''
-        if ! download_archive=$(download_release "$version"); then
-                print_error "Failed to download release $version"
+        if ! download_archive=$(download_archive); then
+                print_error "Failed to download archive"
                 exit 1
         fi
-        print_info "Downloaded release $version"
+        print_info "Downloaded archive"
 
         install_from_archive "$download_archive" "$install_dir"
 }
 
 main() {
-        local version="latest"
         local install_dir="$HOME"
 
         while [ $# -gt 0 ]; do
@@ -126,13 +128,6 @@ main() {
                 -h | --help)
                         print_usage
                         exit 0
-                        ;;
-                -l | --latest)
-                        version="latest"
-                        ;;
-                -v | --version)
-                        version="$2"
-                        shift
                         ;;
                 -d | --dir)
                         install_dir="$2"
@@ -147,20 +142,12 @@ main() {
                 shift
         done
 
-        print_info "Running installation..."
-
-        if [ "$version" = "latest" ]; then
-                version=$(fetch_latest_release)
-                if [ -z "$version" ]; then
-                        print_error "Failed to fetch latest release"
-                        exit 1
-                fi
-        fi
+        print_info "Running bootstrap installer..."
 
         install_node
-        install_release "$version" "$install_dir"
+        install_dotfiles "$install_dir"
 
-        print_info "Installation complete"
+        print_info "Bootstrap installation complete"
 }
 
 main "$@"
