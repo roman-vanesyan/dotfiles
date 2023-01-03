@@ -2,7 +2,7 @@
 This is a collection of my dotfiles.
 
 ```bash
-$ curl rmnvn.co/dotfiles.sh | sh
+$ curl -L rmnvn.co/dotfiles.sh | sh
 ```
 
 ## License
