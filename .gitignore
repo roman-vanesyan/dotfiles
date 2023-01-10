@@ -3,6 +3,6 @@
 !.config
 .config/*
 
-
 !.config/nvim
-!.config/wezterm 
+!.config/wezterm
+!.config/git

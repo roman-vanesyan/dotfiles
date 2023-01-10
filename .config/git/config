@@ -1,0 +1,65 @@
+# https://git-scm.com/docs/git-config
+
+[user]
+    # Don't guess my name/email
+    useConfigOnly = true
+
+[init]
+    defaultBranch = main
+
+[apply]
+    whitespace = fix
+
+[core]
+    editor = nvim
+
+    excludesfile = ~/.config/git/ignore
+    attributesfile = ~/.config/git/attributes
+
+    untrackedCache = true
+    whitespace = space-before-tab,trailing-space
+    autocrlf = input
+
+    # Speedup git indexing by realtime fs monitoring.
+    # TODO(roman@vanesyan.com): when I enabled it git got stuck, need to investigate
+    # fsmonitor = true
+
+[color]
+    ui = auto
+
+[gpg]
+    program = gpg2
+
+[commit]
+    # https://help.github.com/articles/signing-commits-using-gpg
+    gpgSign = true
+
+[diff]
+    renames = copies
+
+[help]
+    autoCorrect = 1
+
+[merge]
+    log = true
+
+[push]
+    default = simple
+    followTags = true
+
+    # 
+    gpgSign = if-asked
+
+[include]
+    path = ~/.gitconfig.local
+
+[url "git@github.com:"]
+    insteadOf = gh:
+    insteadOf = https://github.com/
+    pushInsteadOf = git://github.com/
+    pushInsteadOf = https://github.com/
+
+[url "git@gist.github.com:"]
+    insteadOf = gist:
+    pushInsteadOf = git://gist.github.com/
+    pushInsteadOf = https://gist.github.com/
