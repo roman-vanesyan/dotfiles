@@ -1,7 +1,19 @@
 return  {
   { 
     'nvim-telescope/telescope.nvim',
-    priority = 128 -- TODO: parameterize this
+    dependencies = {
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make'
+      }
+    },
+
+    -- config = function (_, opts)
+    --   local telescope = require('telescope')
+    --   telescope.setup(opts)
+    --   telescope.load_extension('fzf')
+    -- end,
+
+    priority = 128, -- TODO: parameterize this
   },
-  'nvim-telescope/telescope-fzf-native.nvim'
 }

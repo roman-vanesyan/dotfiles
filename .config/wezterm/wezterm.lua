@@ -22,7 +22,8 @@ end)
 
 return {
   -- General
-  front_end = 'WebGpu',
+  front_end = 'WebGpu', -- don't ask when closing window/tab.
+  window_close_confirmation = 'NeverPrompt',
 
   -- Fonts
   font = wezterm.font('SF Mono'),
