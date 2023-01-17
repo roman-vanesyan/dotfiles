@@ -11,21 +11,40 @@ if not vim.loop.fs_stat(lazypath) then
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
     '--branch=stable',
-    lazypath
+    lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup('plugins')
+require('lazy').setup({
+  spec = {
+    { import = 'plugin' },
+    { import = 'plugin.lang' },
+  },
 
+  -- defaults = { lazy = true },
+
+  performance = {
+    cache = {
+      enabled = true,
+    },
+  },
+
+  checker = {
+    enabled = true,
+  },
+})
+
+-- Enables 24-bit RGB colors.
+vim.opt.termguicolors = true
 
 -- Highlight on copy (yank).
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('highlight_yank', { clear = true }),
   pattern = '*',
   callback = function()
-    vim.highlight.on_yank { higroup = 'IncSearch', timeout = 500 }
-  end
+    vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 500 })
+  end,
 })
 
 -- Setup neovide if it is installed.
@@ -39,6 +58,17 @@ if vim.g.neovide then
   vim.g.neovide_input_macos_alt_is_meta = true
 end
 
+-- Default to 2 spaces for indentation.
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true -- replace tabs with spaces.
+
+-- Disable soft wrap.
+vim.opt.wrap = false
+
+-- Mimic the style pattern of current file.
+vim.opt.autoindent = true
 vim.opt.smartindent = true
 
 -- Disable backup file.
@@ -68,9 +98,8 @@ vim.opt.relativenumber = true
 -- Highlight cursor line.
 vim.opt.cursorline = true
 
--- Enables 24-bit RGB colors.
-vim.opt.termguicolors = true
-vim.cmd [[ colorscheme dayfox ]]
+-- Higlight column.
+vim.opt.signcolumn = 'yes'
 
 -- Case insientive search unless capital in search.
 vim.opt.ignorecase = true

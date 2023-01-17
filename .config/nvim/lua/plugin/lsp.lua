@@ -11,15 +11,15 @@ return {
       -- LSP progess handler
       {
         'j-hui/fidget.nvim',
-        config = true
+        config = true,
       },
-      
+
       -- lua LSP and some extra goodies
       {
         'folke/neodev.nvim',
-        config = true
-      }
-    }
+        config = true,
+      },
+    },
   },
 
   -- Formatters.
@@ -28,7 +28,7 @@ return {
     event = 'BufReadPre',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'williamboman/mason.nvim'
+      'williamboman/mason.nvim',
     },
     opts = function()
       local nls = require('null-ls')
@@ -44,7 +44,7 @@ return {
         },
       }
     end,
-    config = true
+    config = true,
   },
 
   {
@@ -53,15 +53,15 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
       ensure_installed = {
-        'stylua'
-      }
+        'stylua',
+      },
     },
 
-    config = function (_, opts)
+    config = function(_, opts)
       local mason = require('mason')
 
       mason.setup(opts)
-    end
+    end,
   },
 
   {
@@ -69,9 +69,6 @@ return {
     opts = {
       automatic_installation = true,
       ensure_installed = {
-        'eslint',
-        'tsserver',
-
         'graphql',
         'jsonls',
 
@@ -90,6 +87,6 @@ return {
         'html',
         'remark_ls',
       },
-    }
-  }
+    },
+  },
 }

@@ -29,10 +29,10 @@ return {
         'css',
 
         'markdown',
- 
+
         'json',
         'yaml',
-        'toml'
+        'toml',
       },
 
       auto_install = true,
@@ -41,14 +41,14 @@ return {
         enable = true,
 
         -- Speedup highlighting
-        additional_vim_regex_highlight = false
-      }
+        additional_vim_regex_highlight = false,
+      },
     },
 
     ---@param opts TSConfig
-    config = function (opts)
+    config = function(opts)
       require('nvim-treesitter.configs').setup(opts)
-    end
+    end,
   },
 
   {
@@ -57,12 +57,20 @@ return {
       textobjects = {
         select = {
           enable = true,
-          lookahead = true
-        }
-      }
+          lookahead = true,
+        },
+      },
     },
-    config = function (_, opts)
+    config = function(_, opts)
       require('nvim-treesitter.configs').setup(opts)
-    end
-  }
+    end,
+  },
+
+  -- Sticky header for scope context.
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    opts = {
+      enable = true,
+    },
+  },
 }
