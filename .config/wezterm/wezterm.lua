@@ -22,14 +22,31 @@ end)
 
 return {
   -- General
-  front_end = 'WebGpu', -- don't ask when closing window/tab.
-  window_close_confirmation = 'NeverPrompt',
+  window_close_confirmation = 'NeverPrompt', -- don't ask when closing window/tab.
+
+  -- see https://wezfurlong.org/wezterm/config/lua/config/term.html for prerequisites.
+  term = "wezterm",
 
   -- Fonts
-  font = wezterm.font('SF Mono'),
+  font = wezterm.font('SF Mono', {
+    weight = 'Medium',
+  }),
   font_size = 13,
   line_height = 1.1,
 
+  window_padding = {
+    left = 0,
+    right = 0,
+    top = 0,
+    bottom = 0,
+  },
+
+  -- Tabs
+  use_fancy_tab_bar = true,
+  tab_bar_at_bottom = true,
+  hide_tab_bar_if_only_one_tab = true,
+  show_tab_index_in_tab_bar = false,
+
   -- Colors
-  color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
+  -- color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
 }

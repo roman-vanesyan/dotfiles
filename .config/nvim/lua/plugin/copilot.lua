@@ -1,7 +1,7 @@
 return {
-  -- GitHub Copilot
-  {
-    'github/copilot.vim',
-    event = 'VeryLazy'
-  },
+    -- GitHub Copilot
+    {
+        'github/copilot.vim',
+        event = 'VeryLazy',
+    },
 }
