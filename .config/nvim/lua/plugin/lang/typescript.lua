@@ -9,22 +9,25 @@ return { -- Better syntax highlighting
             )
         end,
     },
+
     {
         'neovim/nvim-lspconfig',
         dependencies = { 'jose-elias-alvarez/typescript.nvim' },
 
         -- @param opts lspconfig.options
-        -- opts = function(_, opts)
-        --     vim.tbl_deep_extend('keep', {
-        --         servers = {
-        --             tsserver = function(_, server_options)
-        --                 require('typescript').setup({
-        --                     server = server_options,
-        --                 })
-        --                 return true
-        --             end,
-        --         },
-        --     }, opts or {})
-        -- end
+        opts = {
+            servers = {
+                tsserver = {},
+            },
+
+            setup = {
+                tsserver = function(_, server_options)
+                    require('typescript').setup({
+                        server = server_options,
+                    })
+                    return true
+                end,
+            },
+        },
     },
 }

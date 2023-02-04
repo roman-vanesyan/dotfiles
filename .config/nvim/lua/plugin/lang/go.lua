@@ -6,4 +6,15 @@ return { -- Better syntax highlighting
             vim.list_extend(opts.ensure_installed, { 'go' })
         end,
     },
+
+    {
+        'neovim/nvim-lspconfig',
+
+        -- @param opts lspconfig.options
+        opts = {
+            servers = {
+                gopls = {},
+            },
+        },
+    },
 }
