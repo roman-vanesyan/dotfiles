@@ -1,8 +1,9 @@
 # Dotfiles
 This is a collection of my dotfiles.
 
-```bash
-$ curl -L rmnvn.co/dotfiles.sh | sh
+```
+git clone --bare git@github.com:roman-vanesyan/dotfiles.git $HOME/.dotfiles/ 
+alias dot='git --git-dir=$HOME/dotfiles.git/ --work-tree=$HOME'
 ```
 
 ## License
