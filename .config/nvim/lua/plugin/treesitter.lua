@@ -1,76 +1,76 @@
 return {
-    -- Better syntax highlighting
-    {
-        'nvim-treesitter/nvim-treesitter',
-        build = ':TSUpdate',
+  -- Better syntax highlighting
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
 
-        event = 'BufReadPost',
+    event = "BufReadPost",
 
-        ---@type TSConfig
-        opts = {
-            indent = { enable = true },
+    ---@type TSConfig
+    opts = {
+      indent = { enable = true },
 
-            ensure_installed = {
-                'javascript',
-                'typescript',
-                'tsx',
+      ensure_installed = {
+        "javascript",
+        "typescript",
+        "tsx",
 
-                'python',
-                'lua',
-                'bash',
+        "python",
+        "lua",
+        "bash",
 
-                'c',
-                'cpp',
+        "c",
+        "cpp",
 
-                'rust',
-                'go',
+        "rust",
+        "go",
 
-                'html',
-                'css',
+        "html",
+        "css",
 
-                'markdown',
+        "markdown",
 
-                'json',
-                'yaml',
-                'toml',
-            },
+        "json",
+        "yaml",
+        "toml",
+      },
 
-            auto_install = true,
+      auto_install = true,
 
-            highlight = {
-                enable = true,
+      highlight = {
+        enable = true,
 
-                -- Speedup highlighting
-                additional_vim_regex_highlight = false,
-            },
-        },
-
-        ---@param opts TSConfig
-        config = function(opts)
-            require('nvim-treesitter.configs').setup(opts)
-        end,
+        -- Speedup highlighting
+        additional_vim_regex_highlight = false,
+      },
     },
 
-    {
-        'nvim-treesitter/nvim-treesitter-textobjects',
-        opts = {
-            textobjects = {
-                select = {
-                    enable = true,
-                    lookahead = true,
-                },
-            },
-        },
-        config = function(_, opts)
-            require('nvim-treesitter.configs').setup(opts)
-        end,
-    },
+    ---@param opts TSConfig
+    config = function(opts)
+      require("nvim-treesitter.configs").setup(opts)
+    end,
+  },
 
-    -- Sticky header for scope context.
-    {
-        'nvim-treesitter/nvim-treesitter-context',
-        opts = {
-            enable = true,
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    opts = {
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
         },
+      },
     },
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+    end,
+  },
+
+  -- Sticky header for scope context.
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    opts = {
+      enable = true,
+    },
+  },
 }

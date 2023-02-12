@@ -1,1 +1,1 @@
-require('config.telescope.keymaps')
+require("config.telescope.keymaps")
