@@ -100,7 +100,7 @@ return {
       return {
         sources = {
           nls.builtins.code_actions.refactoring,
-          nls.builtins.completion.luasnip
+          nls.builtins.completion.luasnip,
         },
         on_attach = function(client, bufnr)
           if client.supports_method("textDocument/formatting") then

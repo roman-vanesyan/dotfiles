@@ -1,4 +1,5 @@
-return { -- Better syntax highlighting
+return {
+  -- Better syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
 
@@ -17,7 +18,7 @@ return { -- Better syntax highlighting
       },
     },
   },
-  
+
   -- Formatters
   {
     "jose-elias-alvarez/null-ls.nvim",
@@ -31,7 +32,7 @@ return { -- Better syntax highlighting
       vim.list_extend(opts.sources, {
         nls.builtins.formatting.gofmt,
         nls.builtins.formatting.goimports,
-        nls.builtins.diagnostics.golangci_lint
+        nls.builtins.diagnostics.golangci_lint,
       })
     end,
   },

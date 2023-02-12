@@ -1,4 +1,5 @@
-return { -- Better syntax highlighting
+return {
+  -- Better syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
 

@@ -4,36 +4,23 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
 
-    event = "BufReadPost",
+    dependencies = {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    },
 
-    ---@type TSConfig
+    -- Prefer master as latest version is outdated.
+    version = false,
+
+    event = { "BufReadPost", "BufNewFile" },
+
+    -- @type TSConfig
     opts = {
       indent = { enable = true },
-
-      ensure_installed = {
-        "javascript",
-        "typescript",
-        "tsx",
-
-        "python",
-        "lua",
-        "bash",
-
-        "c",
-        "cpp",
-
-        "rust",
-        "go",
-
-        "html",
-        "css",
-
-        "markdown",
-
-        "json",
-        "yaml",
-        "toml",
+      context_commentstring = {
+        enable = true,
       },
+
+      ensure_installed = {},
 
       auto_install = true,
 
@@ -46,7 +33,7 @@ return {
     },
 
     ---@param opts TSConfig
-    config = function(opts)
+    config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
