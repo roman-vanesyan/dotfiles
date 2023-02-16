@@ -123,7 +123,7 @@ local map = util.map
 map({ "i", "v" }, "<C-c>", "<Esc>", { desc = "Escape to normal mode" })
 
 -- write to file
-map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", {
+map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><Esc>", {
   desc = "Save file",
 })
 -- new file
@@ -131,12 +131,12 @@ map("n", "<leader>fn", "<cmd>enew<cr>", {
   desc = "New File",
 })
 
--- Autoclose brackets, quotes, etc.
+-- Autoclose brackets, quotes, etc. 
 map({ "i" }, '"', '""')
 map({ "i" }, "'", "''")
 map({ "i" }, "(", "()")
 map({ "i" }, "[", "[]")
 map({ "i" }, "{", "{}")
 map({ "i" }, "<", "<>")
-map({ "i" }, "{<CR>", "{<CR>}<ESC>O")
-map({ "i" }, "{;<CR>", "{<CR>};<ESC>O")
+map({ "i" }, "{<cr>", "{<cr>}<Esc>O")
+map({ "i" }, "{;<cr>", "{<cr>};<Esc>O")
