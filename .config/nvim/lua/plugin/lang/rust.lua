@@ -1,4 +1,11 @@
-return { -- Better syntax highlighting
+return {
+  {
+    "Saecki/crates.nvim",
+    event = "BufRead",
+    setup = true,
+  },
+
+  -- Better syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
 

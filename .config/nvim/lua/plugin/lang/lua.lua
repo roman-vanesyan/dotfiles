@@ -21,7 +21,7 @@ return {
     -- @param opts lspconfig.options
     opts = {
       servers = {
-        sumneko_lua = {
+        lua_ls = {
           settings = {
             Lua = {
               workspace = {

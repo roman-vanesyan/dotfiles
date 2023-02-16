@@ -1,16 +1,15 @@
-local wezterm = require('wezterm')
+local wezterm = require("wezterm")
 
 function scheme_for_appearance(appearance)
-  if appearance:find 'Dark' then
-    return 'GitHub Dark'
+  if appearance:find("Dark") then
+    return "nightfox"
   else
-    -- TODO: set light theme. rn, font looks too thin when using builtin 'Github Light'. 
-    return 'GitHub Dark'
+    return "dayfox"
   end
 end
 
 -- Automatically reload the schema based on OS appearance settings.
-wezterm.on('window-config-reloaded', function(window, pane)
+wezterm.on("window-config-reloaded", function(window, pane)
   local overrides = window:get_config_overrides() or {}
   local appearance = window:get_appearance()
   local scheme = scheme_for_appearance(appearance)
@@ -21,15 +20,19 @@ wezterm.on('window-config-reloaded', function(window, pane)
 end)
 
 return {
+  color_scheme_dirs = {
+    "~/.local/share/nvim/lazy/nightfox.nvim/extra",
+  },
+
   -- General
-  window_close_confirmation = 'NeverPrompt', -- don't ask when closing window/tab.
+  window_close_confirmation = "NeverPrompt", -- don't ask when closing window/tab.
 
   -- see https://wezfurlong.org/wezterm/config/lua/config/term.html for prerequisites.
   term = "wezterm",
 
   -- Fonts
-  font = wezterm.font('SF Mono', {
-    weight = 'Medium',
+  font = wezterm.font("SF Mono", {
+    weight = "Medium",
   }),
   font_size = 13,
   line_height = 1.1,
@@ -48,5 +51,5 @@ return {
   show_tab_index_in_tab_bar = false,
 
   -- Colors
-  -- color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
+  color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
 }

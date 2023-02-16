@@ -13,6 +13,7 @@ return {
       -- LSP progess handler
       {
         "j-hui/fidget.nvim",
+        setup = true,
       },
     },
 
@@ -96,7 +97,7 @@ return {
       "williamboman/mason.nvim",
     },
     opts = function(_, opts)
-      local nls = require("null_ls")
+      local nls = require("null-ls")
       return {
         sources = {
           nls.builtins.code_actions.refactoring,

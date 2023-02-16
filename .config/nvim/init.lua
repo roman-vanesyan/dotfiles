@@ -130,3 +130,13 @@ map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", {
 map("n", "<leader>fn", "<cmd>enew<cr>", {
   desc = "New File",
 })
+
+-- Autoclose brackets, quotes, etc.
+map({ "i" }, '"', '""')
+map({ "i" }, "'", "''")
+map({ "i" }, "(", "()")
+map({ "i" }, "[", "[]")
+map({ "i" }, "{", "{}")
+map({ "i" }, "<", "<>")
+map({ "i" }, "{<CR>", "{<CR>}<ESC>O")
+map({ "i" }, "{;<CR>", "{<CR>};<ESC>O")
