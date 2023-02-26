@@ -4,5 +4,7 @@
 .config/*
 
 !.config/nvim
+.config/nvim/lazy-lock.json
+
 !.config/wezterm
 !.config/git
