@@ -1,7 +1,7 @@
 return {
   -- GitHub Copilot
   {
-    "github/copilot.vim",
+    "zbirenbaum/copilot.lua",
     event = "VeryLazy",
   },
 }

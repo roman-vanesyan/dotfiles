@@ -12,6 +12,10 @@ return {
 
     opts = {
       extensions = {
+        file_browser = {
+          hijack_netrw = true,
+        },
+
         media_files = {
           filetypes = { "png", "webp", "jpg", "jpeg", "svg", "pdf" },
           find_cmd = "rg",

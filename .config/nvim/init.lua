@@ -117,6 +117,9 @@ vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+-- Don't show startup screen
+vim.opt.shortmess:append("c")
+
 local util = require("util")
 local map = util.map
 
@@ -131,7 +134,7 @@ map("n", "<leader>fn", "<cmd>enew<cr>", {
   desc = "New File",
 })
 
--- Autoclose brackets, quotes, etc. 
+-- Autoclose brackets, quotes, etc.
 map({ "i" }, '"', '""')
 map({ "i" }, "'", "''")
 map({ "i" }, "(", "()")
