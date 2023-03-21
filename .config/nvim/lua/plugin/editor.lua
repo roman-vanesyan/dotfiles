@@ -27,6 +27,11 @@ return {
   },
 
   {
+    "akinsho/bufferline.nvim",
+    opts = {},
+  },
+
+  {
     "folke/which-key.nvim",
     config = function()
       vim.o.timeout = true
