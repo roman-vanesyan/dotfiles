@@ -13,6 +13,8 @@ return {
     opts = {
       extensions = {
         file_browser = {
+          respect_gitignore = true,
+          depth = false,
           hijack_netrw = true,
         },
 
