@@ -91,13 +91,15 @@ return {
   -- Formatters.
   {
     "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "williamboman/mason.nvim",
     },
-    opts = function(_, opts)
+    opts = function()
       local nls = require("null-ls")
+      local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
       return {
         sources = {
           nls.builtins.code_actions.refactoring,
@@ -124,6 +126,6 @@ return {
 
   {
     "folke/trouble.nvim",
-    dependencies = {"nvim-tree/nvim-web-devicons"}
-  }
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
 }

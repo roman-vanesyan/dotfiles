@@ -130,7 +130,7 @@ map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><Esc>", {
   desc = "Save file",
 })
 -- new file
-map("n", "<leader>fn", "<cmd>enew<cr>", {
+map("n", "<leader>nf", "<cmd>enew<cr>", {
   desc = "New File",
 })
 

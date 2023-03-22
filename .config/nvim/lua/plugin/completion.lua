@@ -13,6 +13,24 @@ return {
       -- Snippets.
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
+
+      -- GitHub Copilot
+      {
+        "zbirenbaum/copilot-cmp",
+        dependencies = {
+          {
+            "zbirenbaum/copilot.lua",
+            opts = {
+              suggestion = { enabled = false },
+              panel = { enabled = false },
+            },
+          },
+        },
+        opts = function()
+          local copilot_cmp = require("copilot_cmp")
+          copilot_cmp.setup({})
+        end,
+      },
     },
 
     event = "InsertEnter",
@@ -32,11 +50,12 @@ return {
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-i>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
+          { name = "copilot" },
           { name = "nvim_lsp" },
           { name = "buffer" },
           { name = "path" },

@@ -14,7 +14,8 @@ return {
       extensions = {
         file_browser = {
           respect_gitignore = true,
-          depth = false,
+          auto_depth = true,
+          use_fd = true,
           hijack_netrw = true,
         },
 
