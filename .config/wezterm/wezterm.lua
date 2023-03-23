@@ -19,37 +19,43 @@ wezterm.on("window-config-reloaded", function(window, pane)
   end
 end)
 
-return {
-  color_scheme_dirs = {
-    "~/.local/share/nvim/lazy/nightfox.nvim/extra",
-  },
+local config = {}
 
-  -- General
-  window_close_confirmation = "NeverPrompt", -- don't ask when closing window/tab.
+if wezterm.config_builder then
+  config = wezterm.config_builder()
+end
 
-  -- see https://wezfurlong.org/wezterm/config/lua/config/term.html for prerequisites.
-  term = "wezterm",
-
-  -- Fonts
-  font = wezterm.font("SF Mono", {
-    weight = "Medium",
-  }),
-  font_size = 13,
-  line_height = 1.1,
-
-  window_padding = {
-    left = 0,
-    right = 0,
-    top = 0,
-    bottom = 0,
-  },
-
-  -- Tabs
-  use_fancy_tab_bar = true,
-  tab_bar_at_bottom = true,
-  hide_tab_bar_if_only_one_tab = true,
-  show_tab_index_in_tab_bar = false,
-
-  -- Colors
-  color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
+config.color_scheme_dirs = {
+  "~/.local/share/nvim/lazy/nightfox.nvim/extra",
 }
+
+-- General
+config.window_close_confirmation = "NeverPrompt" -- don't ask when closing window/tab.
+
+-- see https://wezfurlong.org/wezterm/config/lua/config/term.html for prerequisites.
+config.term = "wezterm"
+
+-- Fonts
+config.font = wezterm.font("SF Mono", {
+  weight = "Medium",
+})
+config.font_size = 13
+config.line_height = 1.1
+
+config.window_padding = {
+  left = 0,
+  right = 0,
+  top = 0,
+  bottom = 0,
+}
+
+-- Tabs
+config.use_fancy_tab_bar = true
+config.tab_bar_at_bottom = true
+config.hide_tab_bar_if_only_one_tab = true
+config.show_tab_index_in_tab_bar = false
+
+-- Colors
+config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
+
+return config
