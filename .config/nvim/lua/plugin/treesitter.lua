@@ -4,10 +4,6 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
 
-    dependencies = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-    },
-
     -- Prefer master as latest version is outdated.
     version = false,
 
@@ -16,9 +12,6 @@ return {
     -- @type TSConfig
     opts = {
       indent = { enable = true },
-      context_commentstring = {
-        enable = true,
-      },
 
       ensure_installed = {},
 
@@ -38,20 +31,17 @@ return {
     end,
   },
 
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    opts = {
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true,
-        },
-      },
-    },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
-    end,
-  },
+  -- {
+  --   "nvim-treesitter/nvim-treesitter-textobjects",
+  --   opts = {
+  --     textobjects = {
+  --       select = {
+  --         enable = true,
+  --         lookahead = true,
+  --       },
+  --     },
+  --   },
+  -- },
 
   -- Sticky header for scope context.
   {

@@ -91,7 +91,7 @@ return {
   -- Formatters.
   {
     "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPre", "BufWritePre", "BufNewFile" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "williamboman/mason.nvim",

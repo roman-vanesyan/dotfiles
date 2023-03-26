@@ -10,21 +10,35 @@ return {
       "nvim-telescope/telescope-media-files.nvim",
     },
 
-    opts = {
-      extensions = {
-        file_browser = {
-          respect_gitignore = true,
-          auto_depth = true,
-          use_fd = true,
-          hijack_netrw = true,
+    opts = function()
+      local actions = require("telescope._extensions.file_browser.actions")
+
+      return {
+        pickers = {
+          find_files = { hidden = true },
         },
 
-        media_files = {
-          filetypes = { "png", "webp", "jpg", "jpeg", "svg", "pdf" },
-          find_cmd = "rg",
+        extensions = {
+          file_browser = {
+            respect_gitignore = true,
+            auto_depth = true,
+            use_fd = true,
+            hijack_netrw = true,
+          },
+
+          mappings = {
+            ["i"] = {
+              ["<A-r>"] = actions.rename,
+            },
+          },
+
+          media_files = {
+            filetypes = { "png", "webp", "jpg", "jpeg", "svg", "pdf" },
+            find_cmd = "rg",
+          },
         },
-      },
-    },
+      }
+    end,
 
     config = function(_, opts)
       local telescope = require("telescope")

@@ -23,9 +23,7 @@ return {
 
       setup = {
         tsserver = function(_, server_options)
-          require("typescript").setup({
-            server = server_options,
-          })
+          require("typescript").setup({ server = server_options })
           return true
         end,
       },
@@ -43,10 +41,38 @@ return {
     opts = function(_, opts)
       local nls = require("null-ls")
       vim.list_extend(opts.sources, {
-        nls.builtins.formatting.prettier,
-        nls.builtins.formatting.eslint,
-        nls.builtins.diagnostics.eslint,
+        require("typescript.extensions.null-ls.code-actions"),
+        nls.builtins.formatting.eslint_d,
+        nls.builtins.formatting.prettierd,
+        nls.builtins.diagnostics.eslint_d,
+        nls.builtins.code_actions.eslint_d,
       })
     end,
+  },
+
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        eslint = { settings = { workingDirectory = { mode = "auto" } } },
+      },
+    },
+
+    setup = {
+      eslint = function()
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          callback = function(event)
+            if
+              require("lspconfig.util").get_active_client_by_name(
+                event.buf,
+                "eslint"
+              )
+            then
+              vim.cmd("EslintFixAll")
+            end
+          end,
+        })
+      end,
+    },
   },
 }
