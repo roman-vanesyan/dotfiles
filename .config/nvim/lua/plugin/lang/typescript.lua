@@ -4,10 +4,12 @@ return {
     "nvim-treesitter/nvim-treesitter",
 
     opts = function(_, opts)
-      vim.list_extend(
-        opts.ensure_installed,
-        { "javascript", "typescript", "tsx" }
-      )
+      if type(opts.ensure_installed) == "table" then
+        vim.list_extend(
+          opts.ensure_installed,
+          { "javascript", "typescript", "tsx" }
+        )
+      end
     end,
   },
 
@@ -42,10 +44,7 @@ return {
       local nls = require("null-ls")
       vim.list_extend(opts.sources, {
         require("typescript.extensions.null-ls.code-actions"),
-        nls.builtins.formatting.eslint_d,
-        nls.builtins.formatting.prettierd,
-        nls.builtins.diagnostics.eslint_d,
-        nls.builtins.code_actions.eslint_d,
+        nls.builtins.formatting.prettier,
       })
     end,
   },

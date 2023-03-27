@@ -32,6 +32,7 @@ return {
       local function setup(server)
         local server_opts = servers[server] or {}
         server_opts.capabilities = capabilities
+
         if opts.setup[server] then
           if opts.setup[server](server, server_opts) then
             return
@@ -45,8 +46,9 @@ return {
       end
 
       local mlsp = require("mason-lspconfig")
-      local available = mlsp.get_available_servers()
-
+      local available = vim.tbl_keys(
+        require("mason-lspconfig.mappings.server").lspconfig_to_package
+      )
       local ensure_installed = {} ---@type string[]
       for server, server_opts in pairs(servers) do
         if server_opts then
@@ -79,11 +81,20 @@ return {
     config = function(_, opts)
       require("mason").setup(opts)
       local mr = require("mason-registry")
-      for _, tool in ipairs(opts.ensure_installed) do
-        local p = mr.get_package(tool)
-        if not p:is_installed() then
-          p:install()
+
+      local function ensure_installed()
+        for _, tool in ipairs(opts.ensure_installed) do
+          local p = mr.get_package(tool)
+          if not p:is_installed() then
+            p:install()
+          end
         end
+      end
+
+      if mr.refresh() then
+        mr.refresh(ensure_installed)
+      else
+        ensure_installed()
       end
     end,
   },
@@ -91,28 +102,24 @@ return {
   -- Formatters.
   {
     "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufReadPre", "BufWritePre", "BufNewFile" },
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "williamboman/mason.nvim",
     },
     opts = function()
       local nls = require("null-ls")
-      local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
       return {
+        debug = true,
         sources = {
           nls.builtins.code_actions.refactoring,
           nls.builtins.completion.luasnip,
         },
         on_attach = function(client, bufnr)
           if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({
-              group = augroup,
-              buffer = bufnr,
-            })
             vim.api.nvim_create_autocmd("BufWritePre", {
-              group = augroup,
+              group = vim.api.nvim_create_augroup("LspFormatting" .. bufnr, {}),
               buffer = bufnr,
               callback = function()
                 vim.lsp.buf.format({ bufnr = bufnr })
