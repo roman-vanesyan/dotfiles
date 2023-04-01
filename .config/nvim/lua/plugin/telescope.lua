@@ -24,6 +24,8 @@ return {
             auto_depth = true,
             use_fd = true,
             hijack_netrw = true,
+            no_ignore = true,
+            file_ignore_patterns = { "node_modules", ".git" },
           },
 
           mappings = {
