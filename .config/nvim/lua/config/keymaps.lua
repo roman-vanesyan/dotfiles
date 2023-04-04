@@ -40,3 +40,27 @@ map(
   "<cmd>lua vim.lsp.buf.rename()<CR>",
   { desc = "Rename definition" }
 )
+
+-- Code navigation
+map(
+  { "n", "v" },
+  "[",
+  "<C-o>",
+  { desc = "Move cursor to the previous location" }
+)
+map({ "n", "v" }, "]", "<C-i>", { desc = "Move cursor to the next location" })
+map(
+  { "n", "v" },
+  "<leader>e[",
+  "g;",
+  { desc = "Move cursor to previous change location" }
+)
+map(
+  { "n", "v" },
+  "<leader>e]",
+  "g,",
+  { desc = "Move cursor to next change location" }
+)
+map({ "n", "v" }, "<leader>el", "gi", {
+  desc = "Move cursor to the last position where cursor was in the insert mode",
+})
