@@ -32,6 +32,13 @@ return {
   },
 
   {
+    "lukas-reineke/indent-blankline.nvim",
+    opts = {
+      show_current_context = true,
+    },
+  },
+
+  {
     "folke/which-key.nvim",
     config = function()
       vim.o.timeout = true
