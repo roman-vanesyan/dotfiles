@@ -8,13 +8,7 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
 
-      "hrsh7th/cmp-nvim-lsp", -- lsp suggestions
-
-      -- LSP progess handler
-      {
-        "j-hui/fidget.nvim",
-        setup = true,
-      },
+      "hrsh7th/cmp-nvim-lsp", -- lsp suggestion
     },
 
     opts = {
@@ -70,6 +64,7 @@ return {
 
   {
     "williamboman/mason.nvim",
+    build = ":MasonUpdate",
     cmd = "Mason",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {

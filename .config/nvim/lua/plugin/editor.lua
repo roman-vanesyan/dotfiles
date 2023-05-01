@@ -27,6 +27,11 @@ return {
   },
 
   {
+    "j-hui/fidget.nvim",
+    opts = {},
+  },
+
+  {
     "akinsho/bufferline.nvim",
     opts = {},
   },

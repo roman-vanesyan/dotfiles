@@ -24,21 +24,26 @@ map({ "i" }, "{;<cr>", "{<cr>};<left><left><reft><Esc>O")
 map(
   { "n", "v" },
   "gd",
-  "<cmd>Telescope lsp_definitions<cr>",
-  { desc = "Go to declaration" }
+  "<cmd>Telescope lsp_definitions<CR>",
+  { desc = "Goto definition" }
 )
-map(
-  { "n", "v" },
-  "gD",
-  "<cmd>vim.lsp.buf.declaration<cr>",
-  { desc = "Goto Declaration" }
-)
-
 map(
   { "n", "v" },
   "<leader>rn",
   "<cmd>lua vim.lsp.buf.rename()<CR>",
   { desc = "Rename definition" }
+)
+map(
+  { "n", "v" },
+  "<leader>ca",
+  "<cmd>lua vim.lsp.buf.code_action()<CR>",
+  { desc = "Code actions" }
+)
+map(
+  { "n", "v" },
+  "<leader>f",
+  "<cmd>lua vim.lsp.buf.format()<CR>",
+  { desc = "Code actions" }
 )
 
 -- Code navigation
