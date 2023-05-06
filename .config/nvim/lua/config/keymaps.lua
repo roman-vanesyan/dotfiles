@@ -43,7 +43,7 @@ map(
   { "n", "v" },
   "<leader>f",
   "<cmd>lua vim.lsp.buf.format()<CR>",
-  { desc = "Code actions" }
+  { desc = "Format file" }
 )
 
 -- Code navigation
