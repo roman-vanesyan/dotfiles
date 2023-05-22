@@ -45,6 +45,18 @@ map(
   "<cmd>lua vim.lsp.buf.format()<CR>",
   { desc = "Format file" }
 )
+map(
+  { "n", "v" },
+  "<leader>h",
+  "<cmd>lua vim.lsp.buf.hover()<CR>",
+  { desc = "Hover" }
+)
+map(
+  { "n", "v" },
+  "<leader>hd",
+  "<cmd>lua vim.diagnostic.open_float()<CR>",
+  { desc = "Show diagnostics" }
+)
 
 -- Code navigation
 map(
