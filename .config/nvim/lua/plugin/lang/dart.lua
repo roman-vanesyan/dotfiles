@@ -8,16 +8,16 @@ return {
     end,
   },
 
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --
-  --   -- @param opts lspconfig.options
-  --   opts = {
-  --     servers = {
-  --       dartls = {},
-  --     },
-  --   },
-  -- },
+  {
+    "neovim/nvim-lspconfig",
+
+    -- @param opts lspconfig.options
+    opts = {
+      servers = {
+        dartls = {},
+      },
+    },
+  },
 
   -- Formatters
   {
@@ -33,15 +33,5 @@ return {
         nls.builtins.formatting.dart_format,
       })
     end,
-  },
-
-  {
-    "akinsho/flutter-tools.nvim",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim",
-    },
-    opts = {},
   },
 }
