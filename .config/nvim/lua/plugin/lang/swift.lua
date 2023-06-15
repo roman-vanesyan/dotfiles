@@ -14,8 +14,21 @@ return {
     opts = {
       servers = {
         sourcekit = {},
+        root_dir = { "Package.swift", "Project.swift", ".git" },
       },
     },
+  },
+
+  {
+    "kkharji/xbase",
+    build = "make install",
+    event = "BufReadPre",
+    opts = function(_, opts)
+      return {
+        -- LSP is configured in `nvim-lspconfig`
+        sourcekit = nil,
+      }
+    end,
   },
 
   {
@@ -28,7 +41,7 @@ return {
     opts = function(_, opts)
       local nls = require("null-ls")
       vim.list_extend(opts.sources, {
-        nls.builtins.formatting["swift-format"],
+        nls.builtins.formatting.swift_format,
         nls.builtins.formatting.swiftlint,
       })
     end,
