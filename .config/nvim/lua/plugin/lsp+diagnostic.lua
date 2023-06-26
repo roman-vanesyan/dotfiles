@@ -1,3 +1,4 @@
+local util = require("util")
 return {
   {
     "neovim/nvim-lspconfig",
@@ -18,6 +19,29 @@ return {
     },
 
     config = function(_, opts)
+      -- Show diagnostics on hover.
+      util.on_attach(function(_, bufnr)
+        vim.api.nvim_create_autocmd("CursorHold", {
+          buffer = bufnr,
+          callback = function()
+            local diagnostic_opts = {
+              focusable = false,
+              close_events = {
+                "BufLeave",
+                "CursorMoved",
+                "InsertEnter",
+                "FocusLost",
+              },
+              border = "rounded",
+              source = "always",
+              prefix = " ",
+              scope = "cursor",
+            }
+            vim.diagnostic.open_float(nil, diagnostic_opts)
+          end,
+        })
+      end)
+
       local servers = opts.servers
       local capabilities = require("cmp_nvim_lsp").default_capabilities(
         vim.lsp.protocol.make_client_capabilities()
@@ -112,6 +136,7 @@ return {
           nls.builtins.completion.luasnip,
         },
         on_attach = function(client, bufnr)
+          -- Automatically run formatter on save.
           if client.supports_method("textDocument/formatting") then
             vim.api.nvim_create_autocmd("BufWritePre", {
               group = vim.api.nvim_create_augroup("LspFormatting" .. bufnr, {}),
@@ -124,10 +149,5 @@ return {
         end,
       }
     end,
-  },
-
-  {
-    "folke/trouble.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 }
