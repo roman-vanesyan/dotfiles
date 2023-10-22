@@ -14,23 +14,23 @@ return {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
 
-      -- GitHub Copilot
-      {
-        "zbirenbaum/copilot-cmp",
-        dependencies = {
-          {
-            "zbirenbaum/copilot.lua",
-            opts = {
-              suggestion = { enabled = false },
-              panel = { enabled = false },
-            },
-          },
-        },
-        opts = function()
-          local copilot_cmp = require("copilot_cmp")
-          copilot_cmp.setup({})
-        end,
-      },
+      -- -- GitHub Copilot
+      -- {
+      --   "zbirenbaum/copilot-cmp",
+      --   dependencies = {
+      --     {
+      --       "zbirenbaum/copilot.lua",
+      --       opts = {
+      --         suggestion = { enabled = false },
+      --         panel = { enabled = false },
+      --       },
+      --     },
+      --   },
+      --   opts = function()
+      --     local copilot_cmp = require("copilot_cmp")
+      --     copilot_cmp.setup({})
+      --   end,
+      -- },
     },
 
     event = "InsertEnter",

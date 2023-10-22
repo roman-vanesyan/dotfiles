@@ -9,29 +9,31 @@ return {
   },
 
   {
-    "neovim/nvim-lspconfig",
-
-    -- @param opts lspconfig.options
-    opts = {
-      servers = {
-        dartls = {},
-      },
-    },
-  },
-
-  -- Formatters
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
+    "akinsho/flutter-tools.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "williamboman/mason.nvim",
+      "stevearc/dressing.nvim",
     },
-    opts = function(_, opts)
-      local nls = require("null-ls")
-      vim.list_extend(opts.sources, {
-        nls.builtins.formatting.dart_format,
-      })
-    end,
+    setup = {
+      debugger = {
+        enabled = true,
+        run_via_dap = true,
+        exception_breakpoints = {},
+      },
+      lsp = {
+        color = {
+          enabled = true,
+          background = true,
+          virtual_text = false,
+        },
+        settings = {
+          renameFilesWithClasses = "always",
+          updateImportsOnRename = true,
+          completeFunctionCalls = true,
+          lineLength = 80,
+        },
+      },
+      widget_guides = { enabled = true },
+    },
   },
 }
