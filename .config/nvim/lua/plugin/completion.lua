@@ -14,23 +14,7 @@ return {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
 
-      -- -- GitHub Copilot
-      -- {
-      --   "zbirenbaum/copilot-cmp",
-      --   dependencies = {
-      --     {
-      --       "zbirenbaum/copilot.lua",
-      --       opts = {
-      --         suggestion = { enabled = false },
-      --         panel = { enabled = false },
-      --       },
-      --     },
-      --   },
-      --   opts = function()
-      --     local copilot_cmp = require("copilot_cmp")
-      --     copilot_cmp.setup({})
-      --   end,
-      -- },
+      "sourcegraph/sg.nvim", -- Cody (wait until Cody is installed)
     },
 
     event = "InsertEnter",
@@ -51,17 +35,38 @@ return {
         mapping = cmp.mapping.preset.insert({
           ["<C-d>"] = cmp.mapping.scroll_docs(-4),
           ["<C-u>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-Space>"] = {
+            -- insert mode
+            i = cmp.mapping.complete(),
+            -- command-line mode
+            c = function(_fallback)
+              if cmp.visible() then
+                if not cmp.confirm({ select = true }) then
+                  return
+                else
+                  cmp.complete()
+                end
+              end
+            end,
+          },
           ["<CR>"] = cmp.mapping.confirm({ select = false }),
+          ["<C-a>"] = cmp.mapping.complete({
+            config = { sources = { name = "cody" } },
+          }),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lua" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
-          { name = "copilot" },
+          { name = "cody" },
           { name = "buffer" },
           { name = "path" },
         }),
+
+        experimental = {
+          native_menu = false,
+          ghost_text = false,
+        },
       })
     end,
   },
