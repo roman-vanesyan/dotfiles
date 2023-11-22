@@ -6,7 +6,12 @@ local util = require("util")
 local map = util.map
 
 map("n", "<leader>bp", ":Telescope file_browser<CR>", { noremap = true })
-map("n", "<leader>fb", ":Telescope buffers<CR>", { noremap = true })
+map(
+  "n",
+  "<leader>b",
+  ":Telescope buffers sort_mru=true ignore_current_buffer=true<CR>",
+  { noremap = true }
+)
 map("n", "<leader>gf", ":Telescope git_files<CR>", { noremap = true })
 map("n", "<leader>ff", ":Telescope find_files<CR>", { noremap = true })
 map("n", "<leader>fg", ":Telescope live_grep<CR>", { noremap = true })

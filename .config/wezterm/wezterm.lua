@@ -1,11 +1,7 @@
 local wezterm = require("wezterm")
 
 function scheme_for_appearance(appearance)
-  if appearance:find("Dark") then
-    return "nightfox"
-  else
-    return "dayfox"
-  end
+  return "duskfox"
 end
 
 -- Automatically reload the schema based on OS appearance settings.
@@ -34,12 +30,13 @@ config.window_close_confirmation = "NeverPrompt" -- don't ask when closing windo
 
 -- see https://wezfurlong.org/wezterm/config/lua/config/term.html for prerequisites.
 config.term = "wezterm"
+config.native_macos_fullscreen_mode = true -- Use native fullscreen mode on macOs.
 
 -- Fonts
 config.font = wezterm.font("SF Mono", {
   weight = "Medium",
 })
-config.font_size = 13
+config.font_size = 15
 config.line_height = 1.1
 
 config.window_padding = {

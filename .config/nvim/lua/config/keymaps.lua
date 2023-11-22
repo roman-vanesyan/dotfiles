@@ -3,22 +3,17 @@ local map = util.map
 
 map({ "i", "v" }, "<C-c>", "<Esc>", { desc = "Escape to normal mode" })
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
+map({ "n" }, "<leader>q", "<cmd>q<CR>", { desc = "Close current split" })
+
+-- Editor
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><Esc>", {
   desc = "Save file",
 })
 map("n", "<leader>nf", "<cmd>enew<cr>", {
   desc = "New File",
 })
-
--- Autoclose brackets, quotes, etc.
-map({ "i" }, '"', '""<left>')
-map({ "i" }, "'", "''<left>")
-map({ "i" }, "(", "()<left>")
-map({ "i" }, "[", "[]<left>")
-map({ "i" }, "{", "{}<left>")
-map({ "i" }, "<", "<><left>")
-map({ "i" }, "{<cr>", "{<cr>}<left><left><Esc>O")
-map({ "i" }, "{;<cr>", "{<cr>};<left><left><reft><Esc>O")
+map({ "n" }, "<leader>p", "+p")  -- Paste from system clipboard
+map({ "v" }, "<leader>y", '"+y') -- Copy to system clipboard
 
 -- LSP
 map(
@@ -81,3 +76,13 @@ map(
 map({ "n", "v" }, "<leader>el", "gi", {
   desc = "Move cursor to the last position where cursor was in the insert mode",
 })
+
+-- Window management
+map(
+  { "n", "v" },
+  "<leader>wv",
+  "<C-w>v",
+  { desc = "Split window horizontally" }
+)
+map({ "n", "v" }, "<leader>wh", "<C-w>s", { desc = "Split window vertically" })
+map({ "n", "v" }, "<leader>w", "<C-w>", { desc = "Move window" })
