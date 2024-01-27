@@ -21,7 +21,7 @@
     autocrlf = input
 
     # Speedup git indexing by realtime fs monitoring.
-    # TODO(roman@vanesyan.com): when I enabled it git got stuck, need to investigate
+    # TODO(roman@vanesyan.com): when I enabled it, git got stuck, need to investigate
     # fsmonitor = true
 
 [color]
@@ -53,10 +53,11 @@
 
 [url "git@github.com:"]
     insteadOf = gh:
+    insteadOf = https://github.com/
     pushInsteadOf = git://github.com/
-    pushInsteadOf = https://github.com/
 
 [url "git@gist.github.com:"]
     insteadOf = gist:
+    insteadOf = https://gist.github.com/
     pushInsteadOf = git://gist.github.com/
-    pushInsteadOf = https://gist.github.com/
+

@@ -12,8 +12,13 @@ map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><Esc>", {
 map("n", "<leader>nf", "<cmd>enew<cr>", {
   desc = "New File",
 })
-map({ "n" }, "<leader>p", "+p")  -- Paste from system clipboard
+map({ "n" }, "<leader>p", "+p") -- Paste from system clipboard
 map({ "v" }, "<leader>y", '"+y') -- Copy to system clipboard
+
+map("v", "<S-Tab>", "<gv", { desc = "Dedent selected block" })
+map("v", "<Tab>", ">gv", { desc = "Indent selected block" })
+map("n", "<Tab>", ">>", { desc = "Indent current line" })
+map("n", "<S-Tab>", "<<", { desc = "Dedent current line" })
 
 -- LSP
 map(
@@ -76,7 +81,6 @@ map(
 map({ "n", "v" }, "<leader>el", "gi", {
   desc = "Move cursor to the last position where cursor was in the insert mode",
 })
-
 -- Window management
 map(
   { "n", "v" },
