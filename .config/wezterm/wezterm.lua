@@ -18,4 +18,6 @@ config.window_close_confirmation = "NeverPrompt" -- don't ask when closing windo
 config.term = "wezterm"
 config.native_macos_fullscreen_mode = true -- Use native fullscreen mode on macOs.
 
-return util.assign(config, { ui, keymaps })
+local M = util.assign(config, { ui, keymaps })
+
+return M
