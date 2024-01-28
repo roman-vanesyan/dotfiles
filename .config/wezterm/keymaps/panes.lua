@@ -22,6 +22,7 @@ M.keys = {
 
 M.key_tables = {
   pane = {
+    -- Split panes.
     { key = "UpArrow", action = split_pane_actions.up },
     { key = "k", action = split_pane_actions.up },
     { key = "DownArrow", action = split_pane_actions.down },
@@ -30,6 +31,25 @@ M.key_tables = {
     { key = "h", action = split_pane_actions.left },
     { key = "RightArrow", action = split_pane_actions.right },
     { key = "l", action = split_pane_actions.right },
+    {
+      key = "v",
+      action = action.SplitVertical({ domain = "CurrentPaneDomain" }),
+    },
+
+    -- Switch focus to a different pane
+    {
+      key = "f",
+      action = action.PaneSelect({ alphabet = "1234567890" }),
+    },
+
+    -- Swap the current pane with another pane
+    {
+      key = "s",
+      action = action.PaneSelect({
+        mode = "SwapWithActive",
+        alphabet = "1234567890",
+      }),
+    },
   },
 }
 
