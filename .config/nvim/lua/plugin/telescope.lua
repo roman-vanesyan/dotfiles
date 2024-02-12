@@ -11,7 +11,9 @@ return {
     },
 
     opts = function()
-      local actions = require("telescope._extensions.file_browser.actions")
+      local browser_actions =
+        require("telescope._extensions.file_browser.actions")
+      local actions = require("telescope.actions")
 
       return {
         pickers = {
@@ -29,8 +31,12 @@ return {
           },
 
           mappings = {
+            ["n"] = {
+              ["<C-d>"] = actions.delete_buffer,
+            },
             ["i"] = {
-              ["<A-r>"] = actions.rename,
+              ["<A-r>"] = browser_actions.rename,
+              ["<A-d>"] = actions.delete_buffer,
             },
           },
 

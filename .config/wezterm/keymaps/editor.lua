@@ -3,6 +3,11 @@ local action = wezterm.action
 
 local M = {}
 
+local move_cursor_actions = {
+  backward = action.SendString("\x1bb"),
+  forward = action.SendString("\x1bf"),
+}
+
 M.keys = {
   { key = "Escape", mods = "LEADER", action = action.ActivateCopyMode },
 
@@ -10,13 +15,15 @@ M.keys = {
   {
     key = "LeftArrow",
     mods = "SHIFT",
-    action = action.SendKey({ key = "b", mods = "ALT" }),
+    action = move_cursor_actions.backward,
   },
+  { key = "RightArrow", mods = "SHIFT", action = move_cursor_actions.forward },
   {
-    key = "RightArrow",
-    mods = "SHIFT",
-    action = action.SendKey({ key = "f", mods = "ALT" }),
+    key = "LeftArrow",
+    mods = "OPT",
+    action = move_cursor_actions.backward,
   },
+  { key = "RightArrow", mods = "OPT", action = move_cursor_actions.forward },
 }
 
 return M

@@ -38,13 +38,13 @@ M.key_tables = {
 
     -- Switch focus to a different pane
     {
-      key = "f",
+      key = "s",
       action = action.PaneSelect({ alphabet = "1234567890" }),
     },
 
     -- Swap the current pane with another pane
     {
-      key = "s",
+      key = "r",
       action = action.PaneSelect({
         mode = "SwapWithActive",
         alphabet = "1234567890",

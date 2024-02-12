@@ -4,7 +4,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
 
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "go" })
+      vim.list_extend(opts.ensure_installed, { "terraform" })
     end,
   },
 
@@ -14,7 +14,7 @@ return {
     -- @param opts lspconfig.options
     opts = {
       servers = {
-        gopls = {},
+        terraformls = {},
       },
     },
   },
@@ -23,17 +23,16 @@ return {
   {
     "nvimtools/none-ls.nvim",
     event = "BufReadPre",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "williamboman/mason.nvim",
-    },
+    dependencies = { "nvim-lua/plenary.nvim", "williamboman/mason.nvim" },
     opts = function(_, opts)
       local nls = require("null-ls")
       vim.list_extend(opts.sources, {
-        nls.builtins.formatting.gofmt,
-        nls.builtins.formatting.golines,
-        nls.builtins.formatting.goimports,
-        nls.builtins.diagnostics.golangci_lint,
+        nls.builtins.formatting.terraform_fmt.with({
+          command = "tofu",
+        }),
+        nls.builtins.diagnostics.terraform_validate.with({
+          command = "tofu",
+        }),
       })
     end,
   },

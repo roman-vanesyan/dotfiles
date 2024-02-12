@@ -6,7 +6,7 @@ local M = {}
 
 -- M.disable_default_key_bindings = true
 
-M.leader = { key = "Space", mods = "SHIFT" }
+M.leader = { key = "Space", mods = "OPT" }
 
 util.assign(M, { panes, editor })
 

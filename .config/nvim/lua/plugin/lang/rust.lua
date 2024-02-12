@@ -13,6 +13,18 @@ return {
       vim.list_extend(opts.ensure_installed, { "rust" })
     end,
   },
+
+  {
+    "neovim/nvim-lspconfig",
+
+    -- @param opts lspconfig.options
+    opts = {
+      servers = {
+        rust_analyzer = {},
+      },
+    },
+  },
+
   -- Formatters
   {
     "nvimtools/none-ls.nvim",

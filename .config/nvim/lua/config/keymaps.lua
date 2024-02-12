@@ -20,6 +20,11 @@ map("v", "<Tab>", ">gv", { desc = "Indent selected block" })
 map("n", "<Tab>", ">>", { desc = "Indent current line" })
 map("n", "<S-Tab>", "<<", { desc = "Dedent current line" })
 
+-- Buffer
+map({ "v", "n" }, "<leader>bd", "<cmd>bd<cr>", { desc = "Delete buffer" })
+map({ "v", "n" }, "<leader>b]", "<cmd>bn<cr>", { desc = "Next buffer" })
+map({ "v", "n" }, "<leader>b[", "<cmd>bp<cr>", { desc = "Previous buffer" })
+
 -- LSP
 map(
   { "n", "v" },
