@@ -15,7 +15,7 @@ return {
     -- @param opts lspconfig.options
     opts = {
       servers = {
-        nil_ls = {},
+        nixd = {},
       },
     },
   },
@@ -27,11 +27,11 @@ return {
       "nvim-lua/plenary.nvim",
       "williamboman/mason.nvim",
     },
-    opts = function(_, opts)
-      local nls = require("null-ls")
-      vim.list_extend(opts.sources, {
-        nls.builtins.formatting.nixpkgs_fmt,
-      })
-    end,
+    -- opts = function(_, opts)
+    --   local nls = require("null-ls")
+    --   vim.list_extend(opts.sources, {
+    --     nls.builtins.formatting.nixpkgs_fmt,
+    --   })
+    -- end,
   },
 }
